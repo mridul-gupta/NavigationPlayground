@@ -17,7 +17,7 @@
             android:id="@+id/action_mainFragment_to_viewTransactionFragment"
             app:destination="@id/viewTransactionFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_viewBalanceFragment2"
+            android:id="@+id/action_mainFragment_to_viewBalanceFragment"
             app:destination="@id/viewBalanceFragment" />
     </fragment>
     <fragment
