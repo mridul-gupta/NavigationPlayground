@@ -32,7 +32,7 @@ class SpecifyAmountFragment : Fragment() {
         }
 
         binding.cancelBtn.setOnClickListener {
-            activity?.onBackPressed()
+            navController!!.popBackStack()
         }
     }
 }

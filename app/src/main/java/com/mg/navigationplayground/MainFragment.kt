@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import com.google.android.material.transition.Hold
 import com.mg.navigationplayground.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -14,6 +16,11 @@ class MainFragment : Fragment() {
     var navController: NavController? = null
 
     private lateinit var binding: FragmentMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        exitTransition = Hold()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,8 +34,19 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
+
         binding.viewTransactionsBtn.setOnClickListener {
-            navController!!.navigate(R.id.action_mainFragment_to_viewTransactionFragment)
+            val transitionName = getString(R.string.transition_main_to_view_transaction)
+            it.transitionName = transitionName
+
+            navController!!.navigate(
+                resId = R.id.action_mainFragment_to_viewTransactionFragment,
+                args = null,
+                navOptions = null,
+                navigatorExtras = FragmentNavigatorExtras(
+                    it to transitionName
+                )
+            )
         }
 
         binding.sendMoneyBtn.setOnClickListener {
